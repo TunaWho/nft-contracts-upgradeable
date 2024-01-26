@@ -6,10 +6,10 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721Enumer
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
-contract AbstraNFT is ERC721EnumerableUpgradeable, OwnableUpgradeable {
+contract AbstraNFTV2 is ERC721EnumerableUpgradeable, OwnableUpgradeable {
     string internal baseURI;
     bool public paused;
-    uint256 public airdropAllocation = 5000;
+    uint256 public airdropAllocation;
     bytes32 public merkleRoot;
     mapping(address => bool) public whitelistAirdrop; // keep track of the number of NFTs per wallet
 
@@ -79,7 +79,7 @@ contract AbstraNFT is ERC721EnumerableUpgradeable, OwnableUpgradeable {
         if (whitelistAirdrop[_msgSender()]) revert AlreadyClaimed(_msgSender());
 
         // Verify the merkle proof.
-        bytes32 leaf = keccak256(abi.encode(_msgSender()));
+        bytes32 leaf = keccak256(abi.encodePacked(_msgSender()));
         if (!MerkleProof.verify(_merkleProof, merkleRoot, leaf)) revert InvalidProof();
 
         // Mark it claimed and send the token.

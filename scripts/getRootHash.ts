@@ -35,14 +35,14 @@ async function main() {
     // required to derive the root hash of the Merkle Tree
 
     // ✅ Positive verification of address
-    // const claimingAddress = leafNodes[5];
+    const claimingAddress = leafNodes[4];
     // ❌ Change this address to get a `false` verification
     // const claimingAddress = keccak256("0X5B38DA6A701C568545DCFCB03FCB875F56BEDDD6");
 
     // `getHexProof` returns the neighbour leaf and all parent nodes hashes that will
     // be required to derive the Merkle Trees root hash.
-    // const hexProof = merkleTree.getHexProof(claimingAddress);
-    // console.log(hexProof);
+    const hexProof = merkleTree.getHexProof(claimingAddress);
+    console.log(hexProof);
 
     // ✅ - ❌: Verify is claiming address is in the merkle tree or not.
     // This would be implemented in your Solidity Smart Contract
@@ -55,3 +55,8 @@ main()
     console.error(e);
     process.exit(1);
   });
+[
+  "0xe915a10e98df69e678e8614ce38b3780d5a0dee800c0f7a40e2711c771dabae8",
+  "0xa4c2a2584d143c2f81621e962b22bd1ac6728828ce2360830cdb846b2072c323",
+  "0x0bcc681e6cfff4163189f61f723e14525e792d8a91cb867f3d089c1cd337ce8d"
+]

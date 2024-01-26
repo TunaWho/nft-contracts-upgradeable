@@ -11,6 +11,7 @@ const proxyAddress = '0x009a0f7740C3949322784c893D389dE6dde06FD5';
 
 async function upgradeAndVerify(contractName: string, constructorArguments?: Array<string | number>) {
   const factory = await ethers.getContractFactory(contractName);
+  console.log("🚀 ~ upgradeAndVerify ~ factory:", factory)
   console.log('Deploying', contractName, '...');
 
   const contract = await upgrades.upgradeProxy(proxyAddress, factory);
@@ -19,7 +20,7 @@ async function upgradeAndVerify(contractName: string, constructorArguments?: Arr
   console.log(contractName, ' deployed to:', contract.target);
 
   const impAdress = await upgrades.erc1967.getImplementationAddress(
-    await contract.getAddress()
+    contract.target.toString()
   );
 
   if (hre.network.name !== 'hardhat') {

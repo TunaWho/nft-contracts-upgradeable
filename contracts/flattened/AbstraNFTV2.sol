@@ -2359,15 +2359,13 @@ library MerkleProof {
 }
 
 
-// File contracts/AbstraNFT.sol
+// File contracts/AbstraNFTV2.sol
 
 // contracts/TreasureNFT.sol
 // Original license: SPDX_License_Identifier: MIT
 pragma solidity ^0.8.20;
 
-
-
-contract AbstraNFT is ERC721EnumerableUpgradeable, OwnableUpgradeable {
+contract AbstraNFTV2 is ERC721EnumerableUpgradeable, OwnableUpgradeable {
     string internal baseURI;
     bool public paused;
     uint256 public airdropAllocation;
@@ -2440,7 +2438,7 @@ contract AbstraNFT is ERC721EnumerableUpgradeable, OwnableUpgradeable {
         if (whitelistAirdrop[_msgSender()]) revert AlreadyClaimed(_msgSender());
 
         // Verify the merkle proof.
-        bytes32 leaf = keccak256(abi.encode(_msgSender()));
+        bytes32 leaf = keccak256(abi.encodePacked(_msgSender()));
         if (!MerkleProof.verify(_merkleProof, merkleRoot, leaf)) revert InvalidProof();
 
         // Mark it claimed and send the token.
