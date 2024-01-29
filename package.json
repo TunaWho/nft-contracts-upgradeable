@@ -8,6 +8,7 @@
     "compile": "hardhat compile",
     "deploy": "npx hardhat run",
     "gen-hash": "npx hardhat run scripts/getRootHash.ts",
+    "export-wl": "npx hardhat run scripts/getWhitelist.ts",
     "verify": "yarn hardhat verify --network",
     "export-abi": "yarn run hardhat export-abi",
     "test": "hardhat test test/unit/*.spec.js",
@@ -48,6 +49,7 @@
     "@openzeppelin/hardhat-upgrades": "^3.0.2",
     "@zetachain/networks": "^3.0.1",
     "@zetachain/toolkit": "^5.0.0",
+    "axios": "^1.6.7",
     "dotenv": "^16.4.0",
     "keccak256": "^1.0.6",
     "merkletreejs": "^0.3.11"
